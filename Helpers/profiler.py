@@ -5,6 +5,7 @@ import psutil
 
 process = psutil.Process(os.getpid())
 
+
 def profile(method, *parms):
     proc_size_start = process.memory_info().rss
     t1_start = process_time()
@@ -25,6 +26,7 @@ def size_of(object):
     size = sys.getsizeof(object)
     print(format_bytes(size))
 
+
 def format_bytes(size):
     # 2**10 = 1024
     power = 2 ** 10
@@ -39,9 +41,11 @@ def format_bytes(size):
 def format_millisecond(time):
     second = 1000
     min = 60000
-    n = 0
+
     labels = {0: 'ms', 1: 's', 2: 'm'}
-    if time < second:
+
+    if time < 1:
+        time = time * 1000
         n = 0
     elif second <= time <= min:
         time /= second
