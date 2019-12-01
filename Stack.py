@@ -25,7 +25,7 @@ class stack:
         return self._top is None
 
 
-stack = stack()
+#stack = stack()
 
 
 def run(parms):
@@ -36,11 +36,11 @@ def run(parms):
         stack.pop().value
 
 
-input = hlp.generate_array(10, 1000000)
+#input = hlp.generate_array(10, 1000000)
 
 #print(input)
-print("push & popping")
-prof.profile(run, input)
+#print("push & popping")
+#prof.profile(run, input)
 
 
 
