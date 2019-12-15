@@ -50,12 +50,26 @@ class Solution:
                 res.append(out)
         return res
 
+    def levelOrder(self, root):
+        res = []
+        queue = [(root, 0)]
+        while queue:
+            curr, level = queue.pop(0)
+            if curr:
+                if len(res) < level + 1:
+                    res.append([])
+                res[level].append(curr.value)
+                queue.append((curr.left, level + 1))
+                queue.append((curr.right, level + 1))
+        return res
+
 def run(parms):
     sl = Solution()
     for item in parms[0] : sl.insert(item)
     print("inserted")
 
     res = sl.breadth_first(sl.tree)
+    res = sl.levelOrder(sl.tree)
     print(res)
 
 input = [3,9,20,None,None,15,7]
