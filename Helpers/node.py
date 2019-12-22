@@ -54,3 +54,11 @@ class node:
         root.left = self.build_tree_helper(inorder, inorderStart, inorder_index - 1, postorder, postorderStart, postorderStart + left_subtree_count - 1)
         root.right = self.build_tree_helper(inorder, inorder_index + 1, inorderEnd, postorder, postorderStart + left_subtree_count, postorderEnd - 1)
         return root
+
+        # we can build the tree by the fact that:
+        # 1. the last element in the postorder list is the root of the tree
+        # 2. if we took this element and search it in the inorder list we find that the number of elements
+        # on the left of it is the size of the left subtree (leftSize) in the postorder traversal and the same for the right (rightSize).
+        # 3. here the root (laste lement in the postorder list) will be preceeded by rightSize nodes preceeded by leftSize nodes in the postorder list
+        # 3. we can recursively get the left and right nodes of each root using this way
+        # 4. this takes O(n^2) runtime but we can make it O(n) by buidling a hashtable for the locations of every element in the inorder list
