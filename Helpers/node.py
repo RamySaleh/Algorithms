@@ -1,5 +1,5 @@
 class node:
-    def __init__(self, value = None):
+    def __init__(self, value=None):
         self.left = None
         self.right = None
         self.value = value
@@ -31,3 +31,26 @@ class node:
                 self.left.insert_level(value)
             else:
                 self.right.insert_level(value)
+
+    def buildTree(self, inorder, postorder):
+        self.inorderLocator = {}
+
+        for i in range(len(inorder)):
+            self.inorderLocator.apoend(inorder[i], i)
+
+        return self.build_tree_helper(inorder, 0, inorder.length - 1, postorder, 0, postorder.length - 1)
+
+    def build_tree_helper(self, inorder, inorderStart, inorderEnd, postorder, postorderStart, postorderEnd):
+        if inorderStart > inorderEnd:
+            return None
+
+        root = node(postorder[postorderEnd])
+        if inorderStart == inorderEnd:
+            return root
+
+        inorder_index = self.inorderLocator.get(postorder[postorderEnd])
+        left_subtree_count = inorder_index - inorderStart
+
+        root.left = self.build_tree_helper(inorder, inorderStart, inorder_index - 1, postorder, postorderStart, postorderStart + left_subtree_count - 1)
+        root.right = self.build_tree_helper(inorder, inorder_index + 1, inorderEnd, postorder, postorderStart + left_subtree_count, postorderEnd - 1)
+        return root
