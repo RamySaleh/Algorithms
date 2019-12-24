@@ -1,36 +1,36 @@
 class node:
-    def __init__(self, value=None):
+    def __init__(self, val=None):
         self.left = None
         self.right = None
-        self.value = value
+        self.val = val
 
-    def insert_binary(self, value):
+    def insert_binary(self, val):
 
-        # Compare the new value with the parent node
-        if self.value:
-            if value < self.value:
+        # Compare the new val with the parent node
+        if self.val:
+            if val < self.val:
                 if self.left is None:
-                    self.left = node(value)
+                    self.left = node(val)
                 else:
-                    self.left.insert_binary(value)
-            elif value > self.value:
+                    self.left.insert_binary(val)
+            elif val > self.val:
                 if self.right is None:
-                    self.right = node(value)
+                    self.right = node(val)
                 else:
-                    self.right.insert_binary(value)
+                    self.right.insert_binary(val)
         else:
-            self.value = value
+            self.val = val
 
-    def insert_level(self, value):
+    def insert_level(self, val):
         if not self.left:
-            self.left = node(value)
+            self.left = node(val)
         elif not self.right:
-            self.right = node(value)
+            self.right = node(val)
         else:
             if not self.left.left:
-                self.left.insert_level(value)
+                self.left.insert_level(val)
             else:
-                self.right.insert_level(value)
+                self.right.insert_level(val)
 
     def buildTree(self, inorder, postorder):
         self.inorderLocator = {}
