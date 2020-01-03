@@ -39,13 +39,14 @@ def format_bytes(size):
 
 
 def format_millisecond(time):
+    org = time
     second = 1000
     min = 60000
 
     labels = {0: 'ms', 1: 's', 2: 'm'}
 
-    if time < 1:
-        time = time * 1000
+    if time < second:
+        time = time #* 1000
         n = 0
     elif second <= time <= min:
         time /= second
@@ -54,4 +55,4 @@ def format_millisecond(time):
         time /= min
         n = 2
 
-    return str(round(time, 2)) + ' ' + labels[n]
+    return f'{str(round(time, 2))} {labels[n]}'
