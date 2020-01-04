@@ -1,8 +1,5 @@
-from Helpers import profiler as prof
 from Helpers import helper as hlp
 from Helpers import test_class
-import unittest
-
 
 class Solution(test_class.test_class):
 
@@ -30,5 +27,5 @@ class Solution(test_class.test_class):
     def test_2(self):
         self.assertEqual(self.fib(163) , 5193981023518027157495786850488117)
 
-unittest.main()
+test_class.run()
 

@@ -8,3 +8,6 @@ class test_class(unittest.TestCase):
 
     def tearDown(self):
         prof.stop(self.id(), self.prof_start)
+
+def run():
+    unittest.main()
