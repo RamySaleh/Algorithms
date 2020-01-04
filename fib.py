@@ -1,11 +1,13 @@
 from Helpers import profiler as prof
 from Helpers import helper as hlp
+from Helpers import test_class
 import unittest
 
 
-class Solution(unittest.TestCase):
+class Solution(test_class.test_class):
 
     def setUp(self):
+        super().setUp()
         self.lookup = {}
 
     def fib(self, n: int) -> int:
@@ -28,5 +30,5 @@ class Solution(unittest.TestCase):
     def test_2(self):
         self.assertEqual(self.fib(163) , 5193981023518027157495786850488117)
 
-unittest.main(verbosity=2)
+unittest.main()
 

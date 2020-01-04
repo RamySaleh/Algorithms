@@ -24,6 +24,20 @@ def profile(method, *parms):
     #unittest.main()
     return res
 
+def start():
+    proc_size_start = process.memory_info().rss
+    t1_start = process_time()
+    return {'siza_start' : proc_size_start , 'time_start' : t1_start}
+
+def stop(id , start_data):
+    proc_size_stop = process.memory_info().rss
+
+    t1_stop = process_time()
+    elapsed = (t1_stop - start_data['time_start']) * 1000
+    proc_size = abs(proc_size_stop - start_data['siza_start'])
+
+    print(id + ' : ' + format_millisecond(elapsed) + ' - ' + format_bytes(proc_size))
+
 
 def size_of(object):
     size = sys.getsizeof(object)
