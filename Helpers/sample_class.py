@@ -10,6 +10,6 @@ class Solution(test_class.test_class):
         return 0
 
     def test_1(self):
-        self.assertEqual(self.method(4) , 3)
+        self.assertEqual(3, self.method(4))
 
 test_class.run()

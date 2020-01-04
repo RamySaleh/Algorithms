@@ -1,19 +1,39 @@
-from Helpers import profiler as prof
 from Helpers import helper as hlp
+from Helpers import test_class
 
+class Solution(test_class.test_class):
 
-class Solution:
+    def setUp(self):
+        super().setUp()
 
-    def __init__(self):
-        self.lookup = {}
+    def mult_large(self, num1: str, num2:str) -> int:
+        idx = len(num1)-1
+        out = ''
+        carry = 0
 
-    def mult(self, n: int, m: int) -> int:
-        return 0
+        while idx >= 0:
+            n = int(num1[idx])
+            m = int(num2)
 
-def run(parms):
-    sl = Solution()
+            res = n * m
+            if res + carry >= 10:
+                out = str(res + carry - 10) + out
+                carry = 1
+            else:
+                out = str(res + carry) + out
+                carry = 0
 
-    res = sl.fib(parms[0], parms[1])
-    print(res)
+            idx -= 1
 
-prof.profile(run, 45, 11)
+        return out
+
+    def test_1(self):
+        self.assertEqual('32', self.mult_large('16', '2'))
+
+    def test_2(self):
+        self.assertEqual('398', self.mult_large('199', '2'))
+
+    def test_3(self):
+        self.assertEqual('199', self.mult_large('99', '2'))
+
+#test_class.run()
