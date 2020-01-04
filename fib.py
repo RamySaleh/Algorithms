@@ -1,10 +1,11 @@
 from Helpers import profiler as prof
 from Helpers import helper as hlp
+import unittest
 
 
-class Solution:
+class Solution(unittest.TestCase):
 
-    def __init__(self):
+    def setUp(self):
         self.lookup = {}
 
     def fib(self, n: int) -> int:
@@ -21,10 +22,11 @@ class Solution:
 
         return self.lookup[n - 1] + self.lookup[n - 2]
 
-def run(parms):
-    sl = Solution()
+    def test_1(self):
+        self.assertEqual(self.fib(4) , 3)
 
-    res = sl.fib(parms[0])
-    print(res)
+    def test_2(self):
+        self.assertEqual(self.fib(163) , 5193981023518027157495786850488117)
 
-prof.profile(run, 4)
+unittest.main(verbosity=2)
+

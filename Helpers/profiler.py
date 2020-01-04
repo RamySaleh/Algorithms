@@ -2,6 +2,7 @@ import sys
 from time import process_time
 import os
 import psutil
+import unittest
 
 process = psutil.Process(os.getpid())
 
@@ -19,6 +20,8 @@ def profile(method, *parms):
 
     print(format_bytes(proc_size))
     print(format_millisecond(elapsed))
+
+    #unittest.main()
     return res
 
 
