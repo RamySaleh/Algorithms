@@ -15,13 +15,9 @@ class Solution(test_class.test_class):
             n = int(num1[idx])
             m = int(num2)
 
-            res = n * m
-            if res + carry >= 10:
-                out = str(res + carry - 10) + out
-                carry = 1
-            else:
-                out = str(res + carry) + out
-                carry = 0
+            res = (n * m) + carry
+            out = str(res % 10) + out
+            carry = int(res / 10)
 
             idx -= 1
 
@@ -34,6 +30,6 @@ class Solution(test_class.test_class):
         self.assertEqual('398', self.mult_large('199', '2'))
 
     def test_3(self):
-        self.assertEqual('199', self.mult_large('99', '2'))
+        self.assertEqual('891', self.mult_large('99', '9'))
 
 #test_class.run()

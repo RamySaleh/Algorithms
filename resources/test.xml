@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<AuditFile xmlns="urn:StandardAuditFile-Taxation-Financial:NO">
+    <Header xmlns="urn:StandardAuditFile-Taxation-Financial:NO">
+        <AuditFileVersion>2.0</AuditFileVersion>
+        <AuditFileCountry>GB</AuditFileCountry>
+        <AuditFileRegion>POST-LON</AuditFileRegion>
+        <AuditFileDateCreated>2020-01-01</AuditFileDateCreated>
+        <Company>
+            <Name>Test UK Company</Name>
+            <Address>
+                <AdditionalAddressDetail>Broadgate Tower,201 Bishopgate</AdditionalAddressDetail>
+                <City>London</City>
+                <PostalCode>EC2M</PostalCode>
+                <Region>London</Region>
+                <Country>GB</Country>
+                <AddressType>StreetAddress</AddressType>
+            </Address>
+            <Contact>
+                <ContactPerson>
+                    <FirstName>Logan</FirstName>
+                    <LastName>McNeil (CHRO, HRExe, Mgr 4000, MatMgr, ProMgr,TalMgr,VPRept)</LastName>
+                </ContactPerson>
+                <Telephone>+1 415-789-8904</Telephone>
+                <Email>TestWorkEmail@workday.com</Email>
+            </Contact>
+            <TaxRegistration>
+                <TaxRegistrationNumber>123</TaxRegistrationNumber>
+            </TaxRegistration>
+            <BankAccount>
+                <BankAccountNumber>98271829</BankAccountNumber>
+                <BankAccountName>BankAccount</BankAccountName>
+                <CurrencyCode>GBP</CurrencyCode>
+            </BankAccount>
+        </Company>
+        <DefaultCurrencyCode>GBP</DefaultCurrencyCode>
+        <SelectionCriteria>
+            <PeriodStart>1</PeriodStart>
+            <PeriodStartYear>2019</PeriodStartYear>
+            <PeriodEnd>1</PeriodEnd>
+            <PeriodEndYear>2019</PeriodEndYear>
+        </SelectionCriteria>
+        <TaxAccountingBasis>A</TaxAccountingBasis>
+        <TaxEntity>Test UK Company 123456789 - {1234}</TaxEntity>
+    </Header>
+    <MasterFiles xmlns="urn:StandardAuditFile-Taxation-Financial:NO">
+        <GeneralLedgerAccounts>
+            <Account>
+                <AccountID>15714</AccountID>
+                <AccountDescription>Property Management : Chairs - Depreciable</AccountDescription>
+                <StandardAccountID>1642</StandardAccountID>
+                <AccountType>GL</AccountType>
+                <AccountCreationDate>2015-03-25</AccountCreationDate>
+                <OpeningCreditBalance>0.00</OpeningCreditBalance>
+                <ClosingCreditBalance>0.00</ClosingCreditBalance>
+            </Account>
+            <Account>
+                <AccountID>15705</AccountID>
+                <AccountDescription>Property Management : Desks - Non Depreciable</AccountDescription>
+                <StandardAccountID>1642</StandardAccountID>
+                <AccountType>GL</AccountType>
+                <AccountCreationDate>2015-03-25</AccountCreationDate>
+                <OpeningCreditBalance>0.00</OpeningCreditBalance>
+                <ClosingCreditBalance>0.00</ClosingCreditBalance>
+            </Account>
+            <Account>
+                <AccountID>15704</AccountID>
+                <AccountDescription>Property Management : Desks - Depreciable</AccountDescription>
+                <StandardAccountID>1642</StandardAccountID>
+                <AccountType>GL</AccountType>
+                <AccountCreationDate>2015-03-25</AccountCreationDate>
+                <OpeningCreditBalance>0.00</OpeningCreditBalance>
+                <ClosingCreditBalance>0.00</ClosingCreditBalance>
+            </Account>
+            <Account>
+                <AccountID>4815</AccountID>
+                <AccountDescription>Gain/Sales Intangible Software</AccountDescription>
+                <StandardAccountID>1567</StandardAccountID>
+                <AccountType>GL</AccountType>
+                <AccountCreationDate>2015-03-25</AccountCreationDate>
+                <OpeningCreditBalance>0.00</OpeningCreditBalance>
+                <ClosingCreditBalance>0.00</ClosingCreditBalance>
+            </Account>
+        </GeneralLedgerAccounts>
+    </MasterFiles>
+</AuditFile>
