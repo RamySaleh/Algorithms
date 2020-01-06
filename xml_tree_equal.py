@@ -52,12 +52,14 @@ class Solution(test_class.test_class):
         for key in lookup_1:
             if key not in lookup_2:
                 matched = False
-                print(f'{key} in file 1 is missing or not matching')
+                if self.print_log:
+                    print(f'{key} in file 1 is missing or not matching')
 
         for key in lookup_2:
             if key not in lookup_1:
                 matched = False
-                print(f'{key} in file 2 is missing or not matching')
+                if self.print_log:
+                    print(f'{key} in file 2 is missing or not matching')
         return matched
 
     def generate_key(self, node):
@@ -69,10 +71,17 @@ class Solution(test_class.test_class):
 
 
     def test_match(self):
+        self.print_log = False
         self.assertEqual(True, self.is_equal('resources/test.xml', 'resources/test.xml'))
 
     def test_not_match(self):
+        self.print_log = False
         self.assertEqual(False, self.is_equal('resources/test.xml', 'resources/test2.xml'))
 
     def test_not_match_big(self):
+        self.print_log = False
         self.assertEqual(False, self.is_equal('resources/SAF-T Financial__20200106022432_1_1 2.xml', 'resources/SAF-TNorway_CompletedWithWarnings_ExpectedOutput.xml'))
+
+    def test_match_big(self):
+        self.print_log = True
+        self.assertEqual(True, self.is_equal('resources/SAF-TNorway_CompletedWithWarnings_ExpectedOutput.xml', 'resources/SAF-TNorway_CompletedWithWarnings_2.xml'))
