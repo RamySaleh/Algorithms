@@ -6,7 +6,6 @@ class Solution(test_class.test_class):
 
     def setUp(self):
         super().setUp()
-        #self.lookup = {}
 
     def is_equal(self, file1, file2):
         xml_1 = et.parse(file1)
@@ -28,8 +27,12 @@ class Solution(test_class.test_class):
             curr, path = queue.pop(0)
             if curr.tag:
                 node_name = self.get_key(curr)
-                node_text = curr.text.strip()
-                path = f'{path}/{node_name}({node_text})'
+                node_text = None
+                if curr.text:
+                    node_text = curr.text.strip()
+
+                path = f'{path}/{node_name}({node_text})' if node_text else f'{path}/{node_name}'
+
                 lookup[path] = curr
 
                 for child in curr:
@@ -71,5 +74,8 @@ class Solution(test_class.test_class):
 
     def test_not_match(self):
         #self.assertEqual(True, self.is_equal('resources/SAF-T Financial__20200106022432_1_1 2.xml', 'resources/SAF-TNorway_CompletedWithWarnings_ExpectedOutput.xml'))
-        self.assertEqual(True, self.is_equal('resources/test.xml',
+        self.assertEqual(False, self.is_equal('resources/test.xml',
                                              'resources/test2.xml'))
+
+    def test_not_match_big(self):
+        self.assertEqual(True, self.is_equal('resources/SAF-T Financial__20200106022432_1_1 2.xml', 'resources/SAF-TNorway_CompletedWithWarnings_ExpectedOutput.xml'))
