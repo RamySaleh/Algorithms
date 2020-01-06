@@ -40,6 +40,7 @@ class Solution(test_class.test_class):
         return lookup
 
     def get_key(self, node):
+        # return node tag without namespace
         prefix, has_namespace, postfix = node.tag.partition('}')
         node_name = node.tag
         if has_namespace:
@@ -51,12 +52,12 @@ class Solution(test_class.test_class):
         for key in lookup_1:
             if key not in lookup_2:
                 matched = False
-                print(f'{key}')
+                print(f'{key} in file 1 is missing or not matching')
 
         for key in lookup_2:
             if key not in lookup_1:
                 matched = False
-                print(f'{key}')
+                print(f'{key} in file 2 is missing or not matching')
         return matched
 
     def generate_key(self, node):
@@ -68,14 +69,10 @@ class Solution(test_class.test_class):
 
 
     def test_match(self):
-        #self.assertEqual(True, self.is_equal('resources/SAF-T Financial__20200106022432_1_1 2.xml', 'resources/SAF-TNorway_CompletedWithWarnings_ExpectedOutput.xml'))
-        self.assertEqual(True, self.is_equal('resources/test.xml',
-                                             'resources/test.xml'))
+        self.assertEqual(True, self.is_equal('resources/test.xml', 'resources/test.xml'))
 
     def test_not_match(self):
-        #self.assertEqual(True, self.is_equal('resources/SAF-T Financial__20200106022432_1_1 2.xml', 'resources/SAF-TNorway_CompletedWithWarnings_ExpectedOutput.xml'))
-        self.assertEqual(False, self.is_equal('resources/test.xml',
-                                             'resources/test2.xml'))
+        self.assertEqual(False, self.is_equal('resources/test.xml', 'resources/test2.xml'))
 
     def test_not_match_big(self):
-        self.assertEqual(True, self.is_equal('resources/SAF-T Financial__20200106022432_1_1 2.xml', 'resources/SAF-TNorway_CompletedWithWarnings_ExpectedOutput.xml'))
+        self.assertEqual(False, self.is_equal('resources/SAF-T Financial__20200106022432_1_1 2.xml', 'resources/SAF-TNorway_CompletedWithWarnings_ExpectedOutput.xml'))
