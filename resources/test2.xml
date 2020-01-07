@@ -63,18 +63,18 @@
                 <ClosingCreditBalance>0.00</ClosingCreditBalance>
             </Account>
             <Account>
-                <AccountID>15704</AccountID>
-                <AccountDescription>Property Management : Desks - Depreciable</AccountDescription>
-                <StandardAccountID>1642</StandardAccountID>
+                <AccountID>4810</AccountID>
+                <AccountDescription>Gain/Sales Intangible Software</AccountDescription>
+                <StandardAccountID>1567</StandardAccountID>
                 <AccountType>GL</AccountType>
                 <AccountCreationDate>2015-03-25</AccountCreationDate>
                 <OpeningCreditBalance>0.00</OpeningCreditBalance>
                 <ClosingCreditBalance>0.00</ClosingCreditBalance>
             </Account>
             <Account>
-                <AccountID>4810</AccountID>
-                <AccountDescription>Gain/Sales Intangible Software</AccountDescription>
-                <StandardAccountID>1567</StandardAccountID>
+                <AccountID>15704</AccountID>
+                <AccountDescription>Property Management : Desks - Depreciable</AccountDescription>
+                <StandardAccountID>1642</StandardAccountID>
                 <AccountType>GL</AccountType>
                 <AccountCreationDate>2015-03-25</AccountCreationDate>
                 <OpeningCreditBalance>0.00</OpeningCreditBalance>

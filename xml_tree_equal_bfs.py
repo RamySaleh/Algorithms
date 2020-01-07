@@ -8,11 +8,11 @@ class Solution(test_class.test_class):
         super().setUp()
 
     def is_equal(self, file1, file2):
-        tree_1 = et.parse(file1)
+        tree1 = et.parse(file1)
 
-        tree_2 = et.parse(file2)
+        tree2 = et.parse(file2)
 
-        matched = self.compare_trees(tree_1, tree_2)
+        matched = self.compare_trees(tree1, tree2)
 
         return matched
 
@@ -27,8 +27,9 @@ class Solution(test_class.test_class):
         while queue1:
             list1 = queue1.pop(0)
             list2 = queue2.pop(0)
-            matched = self.compare_lists(list1, list2)
-
+            matched = self.compare_lists(list1, list2) and self.compare_lists(list2, list1)
+            if not matched:
+                break
             for node in list1:
                 children = []
                 for child in node:
@@ -52,8 +53,7 @@ class Solution(test_class.test_class):
                     found = True
                     break
             if not found:
-                if self.print_log:
-                    print(f'{node1} in file 1 is missing or not matching')
+                self.print_node(node1)
                 match = False
                 break
         return match
@@ -67,13 +67,27 @@ class Solution(test_class.test_class):
                 return True
         return False
 
+    def print_node(self, node):
+        if self.print_log:
+            prefix, has_namespace, postfix = node.tag.partition('}')
+            node_name = node.tag
+            if has_namespace:
+                node_name = postfix
+
+            txt = node_name
+
+            if node.text:
+                txt += '(' + node.text + ')'
+            txt += 'is missing or not matching'
+            print(txt)
+
 
     def test_match(self):
         self.print_log = False
         self.assertEqual(True, self.is_equal('resources/test.xml', 'resources/test.xml'))
 
     def test_not_match(self):
-        self.print_log = False
+        self.print_log = True
         self.assertEqual(False, self.is_equal('resources/test.xml', 'resources/test2.xml'))
 
     def test_not_match_big(self):
