@@ -62,13 +62,6 @@ class Solution(test_class.test_class):
                     print(f'{key} in file 2 is missing or not matching')
         return matched
 
-    def generate_key(self, node):
-        key = node.tag
-        for att in node.attrib:
-            # string builder
-            key += att
-        return hash(key)
-
 
     def test_match(self):
         self.print_log = False
