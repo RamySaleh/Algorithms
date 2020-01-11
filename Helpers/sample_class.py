@@ -12,4 +12,4 @@ class Solution(test_class.test_class):
     def test_1(self):
         self.assertEqual(3, self.method(4))
 
-test_class.run()
+#test_class.run()
