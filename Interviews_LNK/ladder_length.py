@@ -11,11 +11,14 @@ class Solution(test_class.test_class):
         super().setUp()
 
     def ladderLength(self, beginWord: str, endWord: str, wordList):
+        # deque has better performance in popleft O(1)
         queue = collections.deque([[beginWord, 1]])
         chars = 'abcdefghijklmnopqrstuvwxyz'
+        # set has better performace in adding and removing O(1)
         wordList = set(wordList)
 
         while queue:
+            # to pop in alphabetic order because the queue has [a, b, c, d,...]
             word, level = queue.popleft()
             if word == endWord:
                 return level
