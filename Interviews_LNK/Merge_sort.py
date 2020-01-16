@@ -44,3 +44,6 @@ class Solution(test_class.test_class):
 
     def test_2(self):
         self.assertEqual([9,7,4,3,2,1], self.mergeSort([7,3,9,1,2,4], False))
+
+    def test_3(self):
+        self.assertEqual([4], self.mergeSort(hlp.generate_array(1000,5000)))
