@@ -24,24 +24,64 @@ class Solution(test_class.test_class):
                 i = p
         return arr
 
-    def sort_heap(self, arr, n = 0):
+    def sort_heap2(self, arr, k = -1):
         n = len(arr)
-        i = 0
-        while n > 0:
+        if k == -1:
+            k = n
+
+        while k > 0:
             # swap first with last
             arr[0], arr[n-1] = arr[n-1], arr[0]
+            # array is smaller by 1 (last item is deleted)
             n -= 1
+            i = 0
+
             while i * 2 + 1 < n:
-                c1 = i * 2 + 1 # child 1
-                c2 = i * 2 + 2 # child 2
-                c = c1 if (arr[c1] > arr[c2]) or (c2 > n-1) else c2
+                l = i * 2 + 1 # left child
+                r = i * 2 + 2 # right child
+                c = l if (arr[l] > arr[r]) or (r > n-1) else r
 
                 if arr[c] >= arr[i]:
                     arr[i], arr[c] = arr[c], arr[i]
                     i += c
                 else:
                     break
-            i = 0
+            k -= 1
+
+    def heapSort(self, arr, n = -1):
+        n = len(arr)
+
+        for i in range(n - 1, 0, -1):
+
+            # swap value of first indexed
+            # with last indexed
+            arr[0], arr[i] = arr[i], arr[0]
+
+            # maintaining heap property
+            # after each swapping
+            j, index = 0, 0
+
+            while True:
+                index = 2 * j + 1
+
+                # if left child is smaller than
+                # right child point index variable
+                # to right child
+                if (index < (i - 1) and
+                        arr[index] < arr[index + 1]):
+                    index += 1
+
+                # if parent is smaller than child
+                # then swapping parent with child
+                # having higher value
+                if index < i and arr[j] < arr[index]:
+                    arr[j], arr[index] = arr[index], arr[j]
+
+                j = index
+                if index >= i:
+                    break
+
+        return arr
 
 
     def get_kth(self, arr, k):
@@ -66,3 +106,9 @@ class Solution(test_class.test_class):
 
     def test_3_2(self):
         self.assertEqual(3, self.get_kth([5,2,4,1,3,6,0], 4))
+
+    def test_4(self):
+        self.assertEqual([5], self.heapSort([3,2,3,1,2,4,5,5,6,7,7,8,2,3,1,1,1,10,11,5,6,2,4,7,8,5,6]))
+
+    def test_5(self):
+        self.assertEqual([1,1,1,1,2,2,2,3,3,3,4,5,7], self.heapSort([3,2,3,1,2,4,5,7,2,3,1,1,1]))
