@@ -43,17 +43,17 @@ class Solution:
 
     def post_order_itr(self, root):
         res = []
-        pre_stack = [(root, '')]
+        pre_stack = [(root, False)]
         while pre_stack:
             current = pre_stack.pop()
             if current[0]:
-                # push right, push current, push left
-                if current[1] == 'v':
+                # push current, push right, push left
+                if current[1]:
                     res.append(current[0].value)
                 else:
-                    pre_stack.append((current[0].right, ''))
-                    pre_stack.append((current[0].left, ''))
-                    pre_stack.append((current[0], 'v'))
+                    pre_stack.append((current[0], True))
+                    pre_stack.append((current[0].right, False))
+                    pre_stack.append((current[0].left, False))
         return res
 
 def run(parms):
