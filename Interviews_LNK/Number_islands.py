@@ -15,7 +15,7 @@ class Solution(test_class.test_class):
         count = 0
         h, w = len(grid), len(grid[0])
         visited = [[False for _ in range(w)] for _ in range(h)]
-        for r in range(w):
+        for r in range(h):
             for c in range(w):
                 if grid[r][c] == 1 and not visited[r][c]:
                     count += 1
