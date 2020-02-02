@@ -44,6 +44,7 @@ def run(parms):
     print("inserted")
 
     res = sl.get_max_depth_bottom_up()
+    res = sl.get_max_depth_top_down()
     print(res)
 
 input = [1, 2, 3]
