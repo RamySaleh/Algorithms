@@ -8,6 +8,13 @@ class Solution(test_class.test_class):
         super().setUp()
 
     def validPalindrome(self, s: str) -> bool:
+        isValid = self.isPalindrome(s, True)
+        if not isValid:
+            isValid = self.isPalindrome(s, False)
+
+        return isValid
+
+    def isPalindrome(self, s, skipRight):
         i = 0
         j = len(s) - 1
         charRemoved = False
@@ -15,52 +22,24 @@ class Solution(test_class.test_class):
             if s[i] == s[j]:
                 j -= 1
                 i += 1
-            elif not charRemoved and s[i] == s[j - 1]:  # abbca
+            elif skipRight and not charRemoved and s[i] == s[j - 1]:  # abbca
                 j -= 2
                 i += 1
                 charRemoved = True
-            elif not charRemoved and s[i + 1] == s[j]: #acbba
+            elif not charRemoved and s[i + 1] == s[j]:  # acbba
                 j -= 1
                 i += 2
                 charRemoved = True
             else:
                 return False
-
-        return True
-
-    def validPalindrome2(self, s: str) -> bool:
-        if self.isPalindrome(s, -1):
-            return True
-
-        for k in range(len(s)):
-            if self.isPalindrome(s, k):
-                return True
-
-        return False
-
-    def isPalindrome(self, s: str, k):
-        i = 0
-        j = len(s) - 1
-        m = len(s) // 2
-
-        while i < m:
-            if j == k:
-                j -= 1
-            if i == k:
-                i += 1
-
-            if s[i] != s[j]:
-                return False
-            i += 1
-            j -= 1
         return True
 
     # without removing chars
-    def isPalindrome(self, s):
+    def isPalindrome2(self, s):
         if len(s) <= 1:
             return True
         else:
-            return s[0] == s[-1] and self.isPalindrome(s[1:-1])
+            return s[0] == s[-1] and self.isPalindrome2(s[1:-1])
 
     def test_1(self):
         self.assertEqual(True, self.validPalindrome("abba"))
