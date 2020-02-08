@@ -19,9 +19,12 @@ class Solution(test_class.test_class):
         max_r = height[-1]
 
         while l <= r:
+            # update left max
             max_l = max(max_l, height[l])
+            # update right max
             max_r = max(max_r, height[r])
 
+            # update water from the lower side
             if max_l <= max_r:
                 water += max_l - height[l]
                 l += 1
