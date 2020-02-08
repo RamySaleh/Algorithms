@@ -79,7 +79,7 @@ class Solution(test_class.test_class):
         self.assertEqual(nd.node(1), self.deserialize([1,2,3,None,None,4,5]))
 
     def test_3(self):
-        self.assertEqual(nd.node(1), self.deserialize([1,2,3,4,5,6,7]))
+        self.assertEqual([1,2,3,4,5,6,7], self.serialize(self.deserialize([1,2,3,4,5,6,7])) )
 
 
     def build_tree1(self):
