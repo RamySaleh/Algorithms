@@ -18,11 +18,11 @@ def array_to_tree(data):
     while data:
         node = dq.popleft()
         if not node.left:
-            node.left = node(data.pop())
+            node.left = tree.node(data.pop())
             dq.append(node.left)
 
         if not node.right:
-            node.right = node(data.pop())
+            node.right = tree.node(data.pop())
             dq.append(node.right)
 
     return root
