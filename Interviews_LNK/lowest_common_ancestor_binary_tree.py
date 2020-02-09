@@ -18,11 +18,11 @@ class Solution(test_class.test_class):
         if not current_node:
             return False
 
-        left = self.dfs(current_node.left, p, q)
-        right = self.dfs(current_node.right, p, q)
-
         # If the current node is one of p or q
         mid = current_node.val == p.val or current_node.val == q.val
+
+        left = self.dfs(current_node.left, p, q)
+        right = self.dfs(current_node.right, p, q)
 
         if mid and left or mid and right or left and right:
             self.ans = current_node.val
