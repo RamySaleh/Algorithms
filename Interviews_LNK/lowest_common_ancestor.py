@@ -9,7 +9,7 @@ class Solution(test_class.test_class):
     def setUp(self):
         super().setUp()
 
-    def lowestCommonAncestor(self, root, p, q):
+    def lowestCommonAncestor2(self, root, p, q):
         parent_val = root.val
         p_val = p.val
         q_val = q.val
@@ -22,12 +22,26 @@ class Solution(test_class.test_class):
             return self.lowestCommonAncestor(root.left, p, q)
         # We have found the split point, i.e. the LCA node.
         else:
-            return root
+            return root.val
+
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        stack = [root]
+
+        while stack:
+            node = stack.pop()
+
+            if node:
+                if p.val > node.val and q.val > node.val:
+                    stack.append(node.right)
+                elif p.val < node.val and q.val < node.val:
+                    stack.append(node.left)
+                else:
+                    return node.val
 
 
     def test_1(self):
         self.assertEqual(6, self.lowestCommonAncestor(hlp.array_to_tree([6,2,8,0,4,7,9,None,None,3,5]),nd.node(2), nd.node(8)))
 
     def test_2(self):
-        self.assertEqual(6, self.lowestCommonAncestor(hlp.array_to_tree([6, 2, 8, 0, 4, 7, 9, None, None, 3, 5]),
+        self.assertEqual(2, self.lowestCommonAncestor(hlp.array_to_tree([6, 2, 8, 0, 4, 7, 9, None, None, 3, 5]),
                                                           nd.node(2), nd.node(4)))
