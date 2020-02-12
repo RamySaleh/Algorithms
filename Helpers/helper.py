@@ -21,8 +21,22 @@ def array_to_tree(data):
             node.left = tree.node(data.pop())
             dq.append(node.left)
 
-        if not node.right:
+        if data and not node.right:
             node.right = tree.node(data.pop())
             dq.append(node.right)
 
     return root
+
+def tree_to_array(root):
+    res = []
+    dq = collections.deque()
+    dq.append(root)
+
+    while dq:
+        node = dq.popleft()
+        if node:
+            res.append(node.val)
+            dq.append(node.left)
+            dq.append(node.right)
+
+    return res
