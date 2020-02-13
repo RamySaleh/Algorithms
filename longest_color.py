@@ -57,3 +57,7 @@ class Solution(test_class.test_class):
 
     def test_2(self):
         self.assertEqual(9, self.longestColor([[1,4,4,4,4,3,3,1],[2,1,1,4,3,3,1,1],[3,2,1,1,2,3,2,1],[3,3,2,1,2,2,2,2],[3,1,3,1,1,4,4,4],[1,1,3,1,1,4,4,4]]))
+
+    def test_z(self):
+        arr = hlp.generate_array(1000,1000)
+        self.assertEqual(3, self.longestColor([arr for _ in range(100)]))
