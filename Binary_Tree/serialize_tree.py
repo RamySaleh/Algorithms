@@ -1,4 +1,4 @@
-#https://leetcode.com/problems/find-bottom-left-tree-value/
+# https://leetcode.com/problems/find-bottom-left-tree-value/
 from typing import List
 
 from Helpers import helper as hlp
@@ -6,12 +6,46 @@ from Helpers import test_class
 from Helpers import node as nd
 import collections
 
+
 class Solution(test_class.test_class):
 
     def setUp(self):
         super().setUp()
 
-    def serialize(self, root) -> int:
+    def serialize_dfs(self, root):
+        res = []
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node:
+                res.append(node.val)
+                stack.append(node.right)
+                stack.append(node.left)
+            else:
+                res.append(None)
+        while not res[-1]:
+            res.pop()
+        return res
+
+    def deserialize_dfs(self, array):
+        array.reverse()
+        root = nd.node(array.pop())
+        stack = [root]
+        while stack and array:
+            node = stack.pop()
+            if not node.left:
+                val = None
+                while not val: val = array.pop()
+                node.left = nd.node(val)
+                stack.append(node.left)
+            if not node.right:
+                val = None
+                while not val: val = array.pop()
+                node.right = nd.node(val)
+                stack.append(node.right)
+        return root
+
+    def serialize_level(self, root) -> int:
         queue = collections.deque()
         queue.append(root)
         res = []
@@ -29,7 +63,7 @@ class Solution(test_class.test_class):
             res.pop()
         return res
 
-    def deserialize(self, data) -> int:
+    def deserialize_level(self, data) -> int:
         data.reverse()
 
         root = nd.node(data.pop())
@@ -56,6 +90,7 @@ class Solution(test_class.test_class):
                 doit(node.right)
             else:
                 vals.append('#')
+
         vals = []
         doit(root)
         return ' '.join(vals)
@@ -69,18 +104,24 @@ class Solution(test_class.test_class):
             node.left = doit()
             node.right = doit()
             return node
+
         vals = iter(data.split())
         return doit()
 
+    def test_z(self):
+        array = self.serialize_dfs(self.build_tree1())
+        self.assertEqual([1, 2, None, None, 3, 4, None, None, 5], array)
+        root = self.deserialize_dfs(array)
+        self.assertIsNotNone(root)
+
     def test_1(self):
-        self.assertEqual([1,2,3,None,None,4,5], self.serialize(self.build_tree1()))
+        self.assertEqual([1, 2, 3, None, None, 4, 5], self.serialize(self.build_tree1()))
 
     def test_2(self):
-        self.assertEqual(nd.node(1), self.deserialize([1,2,3,None,None,4,5]))
+        self.assertEqual(nd.node(1), self.deserialize([1, 2, 3, None, None, 4, 5]))
 
     def test_3(self):
-        self.assertEqual([1,2,3,4,5,6,7], self.serialize(self.deserialize([1,2,3,4,5,6,7])) )
-
+        self.assertEqual([1, 2, 3, 4, 5, 6, 7], self.serialize(self.deserialize([1, 2, 3, 4, 5, 6, 7])))
 
     def build_tree1(self):
         tree = nd.node(1)
