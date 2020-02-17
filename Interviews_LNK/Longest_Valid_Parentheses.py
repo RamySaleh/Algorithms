@@ -11,19 +11,19 @@ class Solution(test_class.test_class):
         super().setUp()
 
     def longestValidParentheses(self, s: str) -> int:
-        stack = []
+        stack = [-1]
         longest = 0
-        counter = 0
-        for c in s:
-            if c == '(':
-                stack.append(c)
-            elif c == ')':
-                if stack and stack.pop() == '(':
-                    counter += 2
-                else:
-                    counter = 0
-        #if stack:
-        return max(counter, longest)
+        for i in range(len(s)):
+            if s[i] == '(':
+                stack.append(i)
+            elif s[i] == ')':
+                stack.pop()
+                if not stack:  # unmatched closing
+                    stack.append(i)
+                else:  #
+                    longest = max(i - stack[-1], longest)
+
+        return longest
 
     def longestValidParentheses2(self, s: str) -> int:
         stack = [-1]
@@ -51,3 +51,6 @@ class Solution(test_class.test_class):
 
     def test_4(self):
         self.assertEqual(2, self.longestValidParentheses('()'))
+
+    def test_5(self):
+        self.assertEqual(4, self.longestValidParentheses(')()())'))
