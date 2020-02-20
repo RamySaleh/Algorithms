@@ -23,27 +23,27 @@ class Solution(test_class.test_class):
                 stack.append(node.left)
             else:
                 res.append(None)
-        while not res[-1]:
+        while res[-1] is None:
             res.pop()
         return res
 
     def deserialize_dfs(self, array):
+        #array = eval(data)
         array.reverse()
-        root = nd.node(array.pop())
-        stack = [root]
-        while stack and array:
-            node = stack.pop()
-            if not node.left:
-                val = None
-                while not val: val = array.pop()
-                node.left = nd.node(val)
-                stack.append(node.left)
-            if not node.right:
-                val = None
-                while not val: val = array.pop()
-                node.right = nd.node(val)
-                stack.append(node.right)
-        return root
+
+        def _deserialize(array):
+            if not array:
+                return None
+
+            root = None
+            value = array.pop()
+            if value is not None:
+                root = nd.node(value)
+                root.left = _deserialize(array)
+                root.right = _deserialize(array)
+            return root
+
+        return _deserialize(array)
 
     def serialize_level(self, root) -> int:
         queue = collections.deque()
@@ -59,7 +59,7 @@ class Solution(test_class.test_class):
             else:
                 res.append(None)
 
-        while not res[-1]:
+        while res and res[-1] is None:
             res.pop()
         return res
 
@@ -67,18 +67,21 @@ class Solution(test_class.test_class):
         data.reverse()
 
         root = nd.node(data.pop())
-        queue = collections.deque([root])
+        dq = collections.deque([root])
 
         while data:
-            node = queue.popleft()
+            node = dq.popleft()
 
-            node.left = nd.node(data.pop())
-            if node.left:
-                queue.append(node.left)
+            val = data.pop()
+            if val is not None:
+                node.left = nd.node(val)
+                dq.append(node.left)
 
-            node.right = nd.node(data.pop())
-            if node.right:
-                queue.append(node.right)
+            if data:
+                val = data.pop()
+                if val is not None:
+                    node.right = nd.node(val)
+                    dq.append(node.right)
 
         return root
 
@@ -94,19 +97,6 @@ class Solution(test_class.test_class):
         vals = []
         doit(root)
         return ' '.join(vals)
-
-    def deserialize2(self, data):
-        def doit():
-            val = next(vals)
-            if val == '#':
-                return None
-            node = nd.node(int(val))
-            node.left = doit()
-            node.right = doit()
-            return node
-
-        vals = iter(data.split())
-        return doit()
 
     def test_z(self):
         array = self.serialize_dfs(self.build_tree1())
