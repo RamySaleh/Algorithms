@@ -19,7 +19,7 @@ class Solution(test_class.test_class):
                 cur, num_of_letters = [], 0
             cur += [w]
             num_of_letters += len(w)
-        return res + [''.join(cur).ljust(maxWidth)]
+        return res + [' '.join(cur).ljust(maxWidth)]
 
     def fullJustify2(self, words, maxWidth):
         i, N, result = 0, len(words), []

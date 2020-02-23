@@ -15,7 +15,6 @@ class Solution(test_class.test_class):
         for r in range(h):
             for c in range(w):
                 if not v[r][c]:
-                    #l_color = max(l_color, self.getColorSum(r, c, grid[r][c], grid, v))
                     l_color = max(l_color, self.getColorSum_itr(r, c, grid, v))
         return l_color
 

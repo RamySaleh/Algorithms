@@ -33,4 +33,4 @@ class Solution(test_class.test_class):
         return perms
 
     def test_1(self):
-        self.assertEqual([[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]], self.permute([1,2,3]))
+        self.assertEqual([[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]], self.permute_itr([1,2,3]))
