@@ -10,7 +10,7 @@ class Solution(test_class.test_class):
     def setUp(self):
         super().setUp()
 
-    def minWindow(self, s, t):
+    def minWindow2(self, s, t):
         if not t or not s:
             return ""
 
@@ -66,6 +66,46 @@ class Solution(test_class.test_class):
             r += 1
         return "" if ans[0] == float("inf") else s[ans[1]: ans[2] + 1]
 
+    def minWindow(self, s, t):
+        if not t or not s:
+            return ""
+
+        dicT = collections.Counter(t)
+
+        window = {}
+        minDistance = float("inf")
+        l = 0
+        ans = None
+        for r in range(len(s)):  # enlarge window from the right
+            c = s[r]
+            window[c] = window.get(c, 0) + 1
+
+            while self.containsString(dicT, window):  # as long as desirable
+                # the enhancement condition
+                currDistance = r - l
+                if currDistance < minDistance:
+                    minDistance = currDistance
+                    ans = [l,r + 1]
+
+                # retract window from the left
+                c = s[l]
+                window[c] -= 1
+                l += 1
+
+        return s[ans[0]: ans[1]] if ans else ""
+
+    def containsString(self, dicT, dicS):
+        for c,count in dicT.items():
+            if c not in dicS or dicS[c] < count:
+                return False
+        return True
+
+    def containsString2(self, t, dic):
+        for c in t:
+            if c not in dic:
+                return False
+        return True
+
     def test_1(self):
         self.assertEqual("BANC", self.minWindow("ADOBECODEBANCD","ABC"))
 
@@ -74,3 +114,6 @@ class Solution(test_class.test_class):
 
     def test_3(self):
         self.assertEqual("a", self.minWindow("a","a"))
+
+    def test_4(self):
+        self.assertEqual("", self.minWindow("a","aa"))

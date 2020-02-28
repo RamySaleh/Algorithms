@@ -10,7 +10,7 @@ class Solution(test_class.test_class):
     def setUp(self):
         super().setUp()
 
-    def checkSubarraySum(self, nums, k):
+    def checkSubarraySum2(self, nums, k):
         # (sum1 - sum2) % k = 0 , sum1 = sum(0 to 5), sum2 = sum(0 to 3) -> sum(4 to 5)
         # sum1 % k - sum2 % k = 0
         # sum1 % k = sum2 % k
@@ -32,6 +32,9 @@ class Solution(test_class.test_class):
 
     def test_1(self):
         self.assertEqual(True, self.checkSubarraySum([23, 2, 4, 6, 7], 6))
+
+    def test_1_1(self):
+        self.assertEqual(True, self.checkSubarraySum([23, 6, 4, 4, 8], 7))
 
     def test_2(self):
         self.assertEqual(False, self.checkSubarraySum([0, 1, 0], 0))
