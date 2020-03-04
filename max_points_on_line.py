@@ -12,27 +12,33 @@ class Solution(test_class.test_class):
         super().setUp()
 
     def maxPoints(self, points: List[List[int]]) -> int:
-        if not points:
-            return 0
-        if len(points) == 1:
-            return 1
-        if len(points) == 2:
-            return 2
+        n = len(points)
+        if n <= 2:
+            return n
         dic = {}
         res = 0
-        h = len(points)
-        for i in range(h):
-            for j in range(i + 1, h):
+        for i in range(n):
+            for j in range(i + 1, n):
+                key = ''
                 if points[j][0] == points[i][0]:
-                    m = -10 * points[j][0]
+                    #m = -10 * points[j][0]
+                    m = 'v'
+                    c = points[j][0]
                 elif points[j][1] == points[i][1]:
-                    m = 10 * points[j][1]
+                    #m = 10 * points[j][1]
+                    m = 'h'
+                    c = points[j][1]
                 else:
+                    # m = y2 - y1 / x2 - x1        y = mx + c
                     m = (points[j][1] - points[i][1]) / (points[j][0] - points[i][0])
-                dic[m] = dic.get(m, set())
-                dic[m].add(i)
-                dic[m].add(j)
-                res = max(res, len(dic[m]))
+                    c = points[j][1]
+                if m == 5:
+                    print(points[i])
+                    print(points[j])
+                    print(str(c) + '----')
+                key = f'{m},{c}'
+                dic.setdefault(key, set()).update([i, j])
+                res = max(res, len(dic[key]))
         return res
 
     def test_1(self):
