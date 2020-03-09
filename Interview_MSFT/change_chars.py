@@ -9,34 +9,41 @@ class Solution(test_class.test_class):
     def setUp(self):
         super().setUp()
 
-    def getString(self, str):
-        dic = self.buildDic(str)
+    def getString(self, riddle):
+        # write your code in Python 3.6
         letters = 'abcdefghijklmnopqrstuvwxyz'
-        for i in range(len(str)):
-            if str[i] == '?':
+        s = list(riddle)
+        before = None
+        for i in range(len(s)):
+            if s[i] == '?':
                 char = None
-                while not char or not self.validChar(char, i, str, dic):
+                while not char or not self.validChar(before, char, i, s):
                     char = random.choice(letters)
-                str = str[:i] + char + str[i + 1:]
-                dic[str[i]] = None
-        print(str)
-        return str
+                    s[i] = char
+            before = s[i]
+        res = ''.join(s)
+        return res
 
-    def buildDic(self, str):
-        dic = {}
-        for c in str:
-            if c != '?':
-                dic[c] = None
-        return dic
+    def validChar2(self,char, i, s):
+        if len(s) == 1:
+            return True
+        elif i == 0 and i + 1 < len(s) and char == s[i + 1]:
+            return False
+        elif i == len(s) - 1 and char == s[i - 1]:
+            return False
+        elif 0 < i < len(s) - 1 and (char == s[i - 1] or char == s[i + 1]):
+            return False
 
-    def validChar(self,char, i, str, dic):
-        if char in dic:
+        return True
+
+    def validChar(self, before,char, i, s):
+        if len(s) == 1:
+            return True
+        elif not before and i + 1 < len(s) and char == s[i + 1]:
             return False
-        elif i == 0 and i + 1 < len(str) and char == str[i + 1]:
+        elif i == len(s) - 1 and char == s[i - 1]:
             return False
-        elif i == len(str) - 1 and char == str[i - 1]:
-            return False
-        elif 0 < i < len(str) - 1 and (char == str[i - 1] or char == str[i + 1]):
+        elif 0 < i < len(s) - 1 and (char == s[i - 1] or char == s[i + 1]):
             return False
 
         return True
@@ -52,6 +59,9 @@ class Solution(test_class.test_class):
 
     def test_4(self):
         self.assertEqual(True,self.isValid(self.getString('a????b')))
+
+    def test_4a(self):
+        self.assertEqual(True,self.isValid(self.getString('ab?ac?')))
 
     def test_5(self):
         self.assertEqual(True,self.isValid(self.getString('a??????????')))

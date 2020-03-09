@@ -4,6 +4,7 @@ from typing import List
 from Helpers import helper as hlp
 from Helpers import test_class
 from Helpers import profiler as prof
+import heapq
 import collections
 
 class Solution(test_class.test_class):
@@ -47,7 +48,7 @@ class Solution(test_class.test_class):
         for nums in dic.values():
             if len(nums) < 2:
                 continue
-            max_sum = max(max_sum, sum(nums))
+            max_sum = max(max_sum, nums)
 
         return max_sum
 
@@ -59,7 +60,7 @@ class Solution(test_class.test_class):
         return s
 
     def test_1(self):
-        self.assertEqual(93, self.getMaxSum([51,71,17,42]))
+        self.assertEqual(93, self.getMaxSum([51,71,17,42, 33]))
 
     def test_1_1(self):
         self.assertEqual(151, self.getMaxSum([51,71,17,42,80]))

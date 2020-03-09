@@ -11,19 +11,30 @@ class Solution(test_class.test_class):
         super().setUp()
 
     def getFactors(self, n: int) -> List[List[int]]:
-        res = []
-        self.rec(n, [], res)
+        return self.rec(n, 2, [], [])
+
+    def rec(self, n, i, factors, res):
+        while i*i <= n:
+            if n % i == 0:
+                res.append(factors + [i, n//i])
+                self.rec(n // i, i, factors + [i], res)
+            i += 1
         return res
 
-    def rec(self, n, factors, res):
-        if n == 1:
-            res.append(factors)
-            return
-
-        for i in range(2, n + 1):
-            if n % i == 0:
-                res += factors + [i, n/i]
-                self.rec(n // i, factors + [i], res)
+    def getFactors2(self,  n: int) -> List[List[int]]:
+        res = []
+        i = 2
+        while i*i <= n:
+            arr = []
+            stack = [n]
+            while stack:
+                n = stack.pop()
+                if n % i == 0:
+                    arr += [i]
+                    stack.append(n//i)
+            i += 1
+            res.append(arr)
+        return res
 
     def test_1(self):
         self.assertEqual([[2,6],[2,2,3],[3,4]], self.getFactors(12))
