@@ -1,4 +1,4 @@
-# https://leetcode.com/explore/interview/card/linkedin/339/array-and-strings/2907/
+# https://leetcode.com/problems/nested-list-weight-sum/
 
 from Helpers import helper as hlp
 from Helpers import test_class
