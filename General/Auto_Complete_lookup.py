@@ -31,7 +31,7 @@ def read_file(path):
     f.close()
     return x
 
-all_words = read_file('resources/all_words.txt')
+all_words = read_file('../resources/all_words.txt')
 
 t1_start = process_time()
 

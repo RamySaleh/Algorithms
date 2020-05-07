@@ -13,7 +13,7 @@ class Wallet(test_class.test_class):
         self.wallet = []
 
     def loadWalletFromFile(self):
-        f = open('resources/Wallet.txt', 'r')
+        f = open('../resources/Wallet.txt', 'r')
         x = f.readline()
         self.wallet = eval(x)
         f.close()

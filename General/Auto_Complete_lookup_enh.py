@@ -33,7 +33,7 @@ def read_file(path):
     return x
 
 
-all_words = read_file('resources/all_words.txt')
+all_words = read_file('../resources/all_words.txt')
 
 small_words = ['nest', 'nested' , 'need']
 
