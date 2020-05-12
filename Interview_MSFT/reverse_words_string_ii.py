@@ -11,7 +11,7 @@ class Solution(test_class.test_class):
 
     def reverseWords(self, s: List[str]) -> None:
         start = 0
-        self.swap(s, start, len(s) - 1)
+        s.reverse()
         for i, c in enumerate(s):
             if c == " " or i + 1 == len(s):
                 self.swap(s, start, i - 1 if i < len(s) - 1 else i)
