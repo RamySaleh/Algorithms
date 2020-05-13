@@ -10,30 +10,23 @@ class Solution(test_class.test_class):
         super().setUp()
 
     def longestPalindrome(self, s: str) -> str:
-        dic, res = {}, ''
-        if s:
-            res = s[0]
-        for i,c in enumerate(s):
-            dic.setdefault(c, []).append(i)
+        start = 0
+        end = 0
 
-        for c,indx in dic.items():
-            if(len(indx)) >= 2:
-                for i in range(len(indx)):
-                    for j in range(len(indx) - 1, i, -1):
-                        if indx[j] - indx[i] + 1 > len(res):
-                            if self.isPalindrom(s, indx[i], indx[j]):
-                                res = s[indx[i] : indx[j] + 1]
-                        else:
-                            break
-        return res
+        for i in range(len(s)):
+            len1 = self.expandFromMiddle(s, i, i)
+            len2 = self.expandFromMiddle(s, i, i + 1)
+            ln = max(len1,len2)
+            if ln > end - start:
+                start = i - (ln - 1) // 2
+                end = i + (ln // 2)
+        return s[start : end + 1]
 
-    def isPalindrom(self, s, l, r):
-        while l < r:
-            if s[l] != s[r]:
-                return False
-            l += 1
-            r -= 1
-        return True
+    def expandFromMiddle(self, s, l, r):
+        while l >= 0 and r < len(s) and s[l] == s[r]:
+            l -= 1
+            r += 1
+        return r - l - 1
 
     def test_1(self):
         self.assertEqual('bab',self.longestPalindrome('babad'))
